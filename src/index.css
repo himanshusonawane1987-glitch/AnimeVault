@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --disp: 'Bebas Neue', 'Oswald', sans-serif;
+    --body: 'Inter', system-ui, -apple-system, sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--body);
+    background-color: #0A0C12;
+    background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    color: #F4F6FB;
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: var(--disp);
+  letter-spacing: 0.03em;
+}
+
+/* Glassmorphism primitives */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-panel-subtle {
+  background: rgba(18, 20, 28, 0.65);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Ken Burns slow zoom */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.05) translate(-1.5%, -1%);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.4s infinite;
+}
+
+/* Per-anime card hover special FX */
+.fx-rasengan::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 127, 26, 0.4) 0%, transparent 60%);
+  opacity: 0;
+  transform: rotate(0deg) scale(0.6);
+  transition: opacity 0.4s ease, transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.group:hover .fx-rasengan::after {
+  opacity: 1;
+  transform: rotate(180deg) scale(1.1);
+}
+
+.fx-flame::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: linear-gradient(135deg, transparent 30%, rgba(200, 16, 46, 0.35) 60%, rgba(245, 166, 35, 0.5) 100%);
+  opacity: 0;
+  transform: translateY(20%) rotate(-5deg);
+  transition: opacity 0.35s ease, transform 0.5s var(--ease);
+  pointer-events: none;
+}
+.group:hover .fx-flame::after {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.fx-cursed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 24px rgba(123, 45, 219, 0.5), inset 0 0 12px rgba(34, 211, 238, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.group:hover .fx-cursed::after {
+  opacity: 1;
+}
+
+.fx-rumbling::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(163, 22, 33, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.group:hover .fx-rumbling::after {
+  opacity: 1;
+}
+
+.fx-ocean::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 179, 1, 0.25), transparent);
+  transform: skewX(-20deg);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.3s;
+  pointer-events: none;
+}
+.group:hover .fx-ocean::after {
+  opacity: 1;
+  transform: skewX(-20deg) translateX(100%);
+}
+
+.fx-level-up::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 32px rgba(106, 27, 154, 0.6);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.group:hover .fx-level-up::after {
+  opacity: 1;
+}
+
+.fx-ego::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 207, 255, 0.3) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.4s var(--ease);
+  pointer-events: none;
+}
+.group:hover .fx-ego::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.fx-plus-ultra::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(228, 0, 43, 0.2) 0%, rgba(255, 199, 44, 0.35) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.group:hover .fx-plus-ultra::after {
+  opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0C12;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

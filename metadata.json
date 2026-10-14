@@ -1,0 +1,6 @@
+{
+  "name": "AnimeVault",
+  "description": "Cinematic anime discovery experience featuring eight popular series with official trailers, studio spotlights, and character showcases.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
