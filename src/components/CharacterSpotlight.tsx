@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Quote, Sparkles, Shield, Play, BookOpen } from "lucide-react";
+import { Quote, Shield, Play, BookOpen } from "lucide-react";
 import { AnimeItem } from "../data/animeData";
 
 interface CharacterSpotlightProps {
@@ -24,7 +24,7 @@ export const CharacterSpotlight: React.FC<CharacterSpotlightProps> = ({
   const { anime, character } = activeItem;
 
   return (
-    <section id="spotlight" className="py-24 relative overflow-hidden">
+    <section id="spotlight" className="py-24 relative overflow-hidden bg-[#0A0C12] border-t border-white/5">
       {/* Background radial glow */}
       <div
         className="absolute inset-0 pointer-events-none transition-colors duration-700"
@@ -35,7 +35,7 @@ export const CharacterSpotlight: React.FC<CharacterSpotlightProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-12 reveal-init">
           <div className="inline-flex items-center gap-2 mb-2">
             <span
               className="text-xs uppercase tracking-widest font-bold"
@@ -55,7 +55,7 @@ export const CharacterSpotlight: React.FC<CharacterSpotlightProps> = ({
         </div>
 
         {/* Character Tab Strip (Functional buttons) */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-6 mb-8 scrollbar-none">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-6 mb-8 scrollbar-none reveal-init">
           {spotlightCharacters.map((item, idx) => {
             const isCurrent = idx === activeIndex;
             return (
@@ -80,7 +80,7 @@ export const CharacterSpotlight: React.FC<CharacterSpotlightProps> = ({
 
         {/* Character Showcase Card */}
         <div
-          className="rounded-3xl glass-panel p-6 sm:p-12 relative overflow-hidden transition-all duration-700 border border-white/10"
+          className="rounded-3xl glass-panel p-6 sm:p-12 relative overflow-hidden transition-all duration-700 border border-white/10 reveal-init"
           style={{
             borderLeftWidth: "4px",
             borderLeftColor: anime.palette.primary,

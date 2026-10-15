@@ -4,9 +4,9 @@ import { ANIME_DATA } from "../data/animeData";
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden bg-[#0A0C12] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 max-w-4xl mx-auto">
+        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 max-w-4xl mx-auto reveal-init">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xs uppercase tracking-widest font-bold text-[#F5B301]">
               About AnimeVault
@@ -88,23 +88,33 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="#intro" className="hover:text-white transition-colors">
+                  Prologue
+                </a>
+              </li>
+              <li>
+                <a href="#journey" className="hover:text-white transition-colors">
+                  Odyssey
+                </a>
+              </li>
+              <li>
+                <a href="#highlights" className="hover:text-white transition-colors">
+                  Themes
+                </a>
+              </li>
+              <li>
                 <a href="#explore" className="hover:text-white transition-colors">
                   Explore Series
                 </a>
               </li>
               <li>
-                <a href="#featured" className="hover:text-white transition-colors">
-                  Featured Epic
-                </a>
-              </li>
-              <li>
                 <a href="#trailers" className="hover:text-white transition-colors">
-                  Official Trailers
+                  Trailers
                 </a>
               </li>
               <li>
                 <a href="#spotlight" className="hover:text-white transition-colors">
-                  Character Archives
+                  Characters
                 </a>
               </li>
               <li>

@@ -8,37 +8,30 @@ import { ANIME_DATA, AnimeItem } from "./data/animeData";
 import { ScrollProgressBar } from "./components/ScrollProgressBar";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
+import { CinematicIntro } from "./components/CinematicIntro";
 import { ScrollytellingJourney } from "./components/ScrollytellingJourney";
+import { AnimeHighlights } from "./components/AnimeHighlights";
 import { AnimeGrid } from "./components/AnimeGrid";
-import { FeaturedSpotlight } from "./components/FeaturedSpotlight";
 import { TrailersCarousel } from "./components/TrailersCarousel";
 import { CharacterSpotlight } from "./components/CharacterSpotlight";
 import { StatsBand } from "./components/StatsBand";
+import { FinalCTA } from "./components/FinalCTA";
 import { AboutSection, Footer } from "./components/AboutAndFooter";
 import { TrailerModal } from "./components/TrailerModal";
 import { DetailModal } from "./components/DetailModal";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 export default function App() {
   const [trailerAnime, setTrailerAnime] = useState<AnimeItem | null>(null);
   const [detailAnime, setDetailAnime] = useState<AnimeItem | null>(null);
-  const [featuredAnime, setFeaturedAnime] = useState<AnimeItem>(
-    ANIME_DATA.find((a) => a.id === "jujutsu-kaisen") || ANIME_DATA[0]
-  );
+
+  // Initialize viewport scroll reveals
+  useScrollReveal();
 
   const handleRandomPick = () => {
     const randomIndex = Math.floor(Math.random() * ANIME_DATA.length);
     const pick = ANIME_DATA[randomIndex];
-    setFeaturedAnime(pick);
-
-    // Scroll smoothly to featured section or odyssey
-    const el = document.getElementById("featured");
-    if (el) {
-      el.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-      });
-    }
+    setDetailAnime(pick);
   };
 
   const handleStartOdyssey = () => {
@@ -52,76 +45,98 @@ export default function App() {
     }
   };
 
+  const handleExploreClick = () => {
+    const el = document.getElementById("explore");
+    if (el) {
+      el.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    }
+  };
+
+  const handleTrailersClick = () => {
+    const el = document.getElementById("trailers");
+    if (el) {
+      el.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0A0C12] text-[#F4F6FB] flex flex-col relative selection:bg-[#FF7F1A]/30 selection:text-white">
-      {/* Apple-style Top Reading Scroll Progress Bar */}
+      {/* 1. Apple-style Top Reading Scroll Progress Bar */}
       <ScrollProgressBar />
 
-      {/* Fixed Sticky Glass Navbar with Top Bar Contract */}
+      {/* 2. Fixed Sticky Glass Navbar with Top Bar Contract */}
       <Navbar onRandomPick={handleRandomPick} />
 
-      {/* Main Content Flow */}
+      {/* Main Content Flow — Coherent, non-duplicated narrative architecture */}
       <main className="flex-1">
-        {/* 1. Cinematic Opening Hero with multi-layer depth & scroll coordinator */}
+        {/* Hero Section: The Opening Gate */}
         <HeroSection
           animeList={ANIME_DATA}
-          onExploreClick={() => {
-            const el = document.getElementById("explore");
-            el?.scrollIntoView({
-              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-                ? "auto"
-                : "smooth",
-            });
-          }}
+          onExploreClick={handleExploreClick}
           onWatchTrailer={(anime) => setTrailerAnime(anime)}
           onSelectAnime={(anime) => setDetailAnime(anime)}
           onStartOdyssey={handleStartOdyssey}
         />
 
-        {/* 2. Global Metric Statistics Band */}
+        {/* Global Metric Statistics Band */}
         <StatsBand />
 
-        {/* 3. The Grand Vault Odyssey: Cinematic 3D Scrollytelling Experience */}
+        {/* Cinematic Introduction: Prologue & The Three Pillars */}
+        <CinematicIntro
+          onSelectAnime={(anime: AnimeItem) => setDetailAnime(anime)}
+          onExploreClick={handleExploreClick}
+        />
+
+        {/* The Grand Odyssey: Dual Scroll-Driven & Automatic Scrollytelling Stage */}
         <ScrollytellingJourney
           animeList={ANIME_DATA}
-          onWatchTrailer={(anime) => setTrailerAnime(anime)}
-          onOpenDossier={(anime) => setDetailAnime(anime)}
+          onWatchTrailer={(anime: AnimeItem) => setTrailerAnime(anime)}
+          onOpenDossier={(anime: AnimeItem) => setDetailAnime(anime)}
         />
 
-        {/* 4. Explore 8 Series Grid with 3D Perspective Cards & Live Filters */}
+        {/* Thematic Highlights: Shonen, Dark Fantasy, Ego Survival */}
+        <AnimeHighlights
+          onWatchTrailer={(anime: AnimeItem) => setTrailerAnime(anime)}
+          onOpenDossier={(anime: AnimeItem) => setDetailAnime(anime)}
+        />
+
+        {/* Explore 8 Series Grid with 3D Perspective Cards & Live Filters */}
         <AnimeGrid
           animeList={ANIME_DATA}
-          onSelectAnime={(anime) => setDetailAnime(anime)}
-          onWatchTrailer={(anime) => setTrailerAnime(anime)}
-          onSetFeatured={(anime) => {
-            setFeaturedAnime(anime);
-            document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" });
-          }}
+          onSelectAnime={(anime: AnimeItem) => setDetailAnime(anime)}
+          onWatchTrailer={(anime: AnimeItem) => setTrailerAnime(anime)}
+          onSetFeatured={(anime: AnimeItem) => setDetailAnime(anime)}
         />
 
-        {/* 5. In-Depth Featured Epic Spotlight */}
-        <FeaturedSpotlight
-          anime={featuredAnime}
-          allAnime={ANIME_DATA}
-          onSetFeatured={(anime) => setFeaturedAnime(anime)}
-          onWatchTrailer={(anime) => setTrailerAnime(anime)}
-          onOpenDossier={(anime) => setDetailAnime(anime)}
-        />
-
-        {/* 6. Official Trailers Reel (Horizontal Snap Carousel) */}
+        {/* Official Trailers Reel (Horizontal Snap Carousel) */}
         <TrailersCarousel
           animeList={ANIME_DATA}
           onPlayTrailer={(anime) => setTrailerAnime(anime)}
         />
 
-        {/* 7. Character Spotlight & Philosophical Archives */}
+        {/* Character Archives & Philosophies */}
         <CharacterSpotlight
           animeList={ANIME_DATA}
           onWatchTrailer={(anime) => setTrailerAnime(anime)}
           onOpenDossier={(anime) => setDetailAnime(anime)}
         />
 
-        {/* 8. Studio Transparency & Preservation Notes */}
+        {/* Final Call to Action */}
+        <FinalCTA
+          onRandomPick={handleRandomPick}
+          onExploreClick={handleExploreClick}
+          onTrailersClick={handleTrailersClick}
+        />
+
+        {/* About & Studio Transparency */}
         <AboutSection />
       </main>
 

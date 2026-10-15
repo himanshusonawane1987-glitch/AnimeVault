@@ -126,8 +126,8 @@ export const ANIME_DATA: AnimeItem[] = [
       deep: "#1A1A1A",
       glowRgb: "200, 16, 46"
     },
-    posterUrl: "https://demonslayer-anime.com/infinitycastle/news/SYS/CONTENTS/5e9e6131-0c65-4920-9280-c0b71f270b3b/w300",
-    fallbackPosterUrl: "https://i.ytimg.com/vi/9kb7vK11_Rw/maxresdefault.jpg",
+    posterUrl: "https://i.ytimg.com/vi/9kb7vK11_Rw/maxresdefault.jpg",
+    fallbackPosterUrl: "https://i.ytimg.com/vi/9kb7vK11_Rw/hqdefault.jpg",
     heroBannerUrl: "https://i.ytimg.com/vi/9kb7vK11_Rw/maxresdefault.jpg",
     trailer: {
       videoId: "9kb7vK11_Rw",
@@ -221,7 +221,7 @@ export const ANIME_DATA: AnimeItem[] = [
       }
     ],
     highlights: ["Shibuya Incident Cataclysm", "Infinite Void Domain Expansion", "The Culling Game"],
-    trivia: "MAPPA employed cinema-grade rotoscoping and dynamic dynamic lighting for Gojo's legendary Hollow Purple sequence."
+    trivia: "MAPPA employed cinema-grade rotoscoping and dynamic lighting for Gojo's legendary Hollow Purple sequence."
   },
   {
     id: "attack-on-titan",
@@ -299,9 +299,9 @@ export const ANIME_DATA: AnimeItem[] = [
       deep: "#1B2A4A",
       glowRgb: "230, 62, 46"
     },
-    posterUrl: "https://de7i3bh7bgh0d.cloudfront.net/2026/03/27/20/52/56/4ab710d3-96d2-4350-b76a-56ddd81ef952/OnePiece111_blogsplash_1200x630.jpg",
-    fallbackPosterUrl: "https://i.ytimg.com/vi/nlwLfTxss90/maxresdefault.jpg",
-    heroBannerUrl: "https://dw9to29mmj727.cloudfront.net/promo/2016/5265-SeriesHeaders_OP_2000x800_wm.jpg",
+    posterUrl: "https://i.ytimg.com/vi/nlwLfTxss90/maxresdefault.jpg",
+    fallbackPosterUrl: "https://i.ytimg.com/vi/nlwLfTxss90/hqdefault.jpg",
+    heroBannerUrl: "https://i.ytimg.com/vi/nlwLfTxss90/maxresdefault.jpg",
     trailer: {
       videoId: "nlwLfTxss90",
       title: "ONE PIECE | Episode 1161 Trailer | A Dangerous Deal!",

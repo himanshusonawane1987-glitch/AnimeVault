@@ -25,10 +25,10 @@ export const TrailersCarousel: React.FC<TrailersCarouselProps> = ({
   };
 
   return (
-    <section id="trailers" className="py-24 relative overflow-hidden">
+    <section id="trailers" className="py-24 relative overflow-hidden bg-[#0A0C12] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header with Carousel Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 reveal-init">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs uppercase tracking-widest font-bold text-[#F5B301]">
@@ -65,12 +65,12 @@ export const TrailersCarousel: React.FC<TrailersCarouselProps> = ({
           ref={scrollContainerRef}
           tabIndex={0}
           aria-label="Official trailer reel"
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-thin scrollbar-thumb-white/20 focus:outline-none"
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-thin scrollbar-thumb-white/20 focus:outline-none reveal-init"
         >
-          {animeList.map((anime) => (
+          {animeList.map((anime, idx) => (
             <div
               key={anime.id}
-              className="snap-start shrink-0 w-[85vw] sm:w-[380px] rounded-2xl overflow-hidden bg-[#12141C] border border-white/10 group flex flex-col transition-all duration-300 hover:-translate-y-1.5"
+              className={`snap-start shrink-0 w-[85vw] sm:w-[380px] rounded-2xl overflow-hidden bg-[#12141C] border border-white/10 group flex flex-col transition-all duration-300 hover:-translate-y-1.5 stagger-${(idx % 4) + 1}`}
               style={{
                 boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
               }}
@@ -87,7 +87,6 @@ export const TrailersCarousel: React.FC<TrailersCarouselProps> = ({
                   decoding="async"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
-                    // Try fallback thumbnail if maxres fails
                     const target = e.currentTarget;
                     if (target.src !== anime.trailer.fallbackThumbnail) {
                       target.src = anime.trailer.fallbackThumbnail;

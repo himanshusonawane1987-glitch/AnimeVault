@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Palette } from "../data/animeData";
 
 interface ResilientImageProps {
@@ -28,8 +28,24 @@ export const ResilientImage: React.FC<ResilientImageProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasAllFailed, setHasAllFailed] = useState<boolean>(false);
 
-  // Priority chain: src -> fallbackSrc -> CSS fallback
-  const sources = [src, fallbackSrc].filter(Boolean) as string[];
+  // Build resilient source chain with automatic YouTube hqdefault fallback
+  const rawSources = [src, fallbackSrc].filter(Boolean) as string[];
+  const sources: string[] = [];
+
+  rawSources.forEach((url) => {
+    sources.push(url);
+    if (url.includes("maxresdefault.jpg")) {
+      const hq = url.replace("maxresdefault.jpg", "hqdefault.jpg");
+      if (!sources.includes(hq)) sources.push(hq);
+    }
+  });
+
+  // Reset when src changes
+  useEffect(() => {
+    setCurrentSrcIndex(0);
+    setIsLoading(true);
+    setHasAllFailed(false);
+  }, [src, fallbackSrc]);
 
   const handleError = () => {
     if (currentSrcIndex < sources.length - 1) {
@@ -116,7 +132,7 @@ export const ResilientImage: React.FC<ResilientImageProps> = ({
           fetchPriority={isHero ? "high" : "auto"}
           onError={handleError}
           onLoad={handleLoad}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ${
             isLoading ? "opacity-0 scale-100" : "opacity-100 scale-100"
           } ${className}`}
         />
